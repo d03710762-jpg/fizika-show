@@ -83,7 +83,7 @@ io.on('connection', socket => {
     p.answered = true;
     const remaining = Math.max(0, room.deadline - Date.now());
     const correct = Number(answer) === room.questions[room.questionIndex].correct;
-    const points = correct ? Math.max(0, Math.round(1000 * remaining / 10000)) : 0;
+    const points = correct ? Math.max(0, Math.round(1000 * remaining / 15000)) : 0;
     p.lastPoints = points; p.lastResult = { correct, points, answer: Number(answer) };
     p.score += points; cb?.({ ok: true, correct, points }); broadcast(room);
     if ([...room.players.values()].every(x => x.answered)) endQuestion(room);
@@ -94,8 +94,8 @@ io.on('connection', socket => {
   });
 });
 function beginQuestion(room) {
-  clearTimeout(room.timer); room.status = 'question'; room.deadline = Date.now() + 10000;
+  clearTimeout(room.timer); room.status = 'question'; room.deadline = Date.now() + 15000;
   for (const p of room.players.values()) { p.answered = false; p.lastPoints = 0; p.lastResult = null; }
-  broadcast(room); room.timer = setTimeout(() => endQuestion(room), 10000);
+  broadcast(room); room.timer = setTimeout(() => endQuestion(room), 15000);
 }
 server.listen(PORT, '0.0.0.0', () => console.log(`FIZIKA SHOW ishga tushdi: http://localhost:${PORT}`));
