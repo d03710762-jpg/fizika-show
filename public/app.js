@@ -240,7 +240,7 @@ function renderPlayer(s) {
           0,
           Math.min(
             1000,
-            Math.round(1000 * Math.max(0, lastState.deadline - Date.now()) / 10000)
+            Math.round(1000 * Math.max(0, lastState.deadline - Date.now()) / 15000)
           )
         );
 
@@ -320,7 +320,7 @@ function startTick(deadline, id, pointsId = null) {
       } else {
         const points = Math.max(
           0,
-          Math.min(1000, Math.round(1000 * remaining / 10000))
+          Math.min(1000, Math.round(1000 * remaining / 15000))
         );
 
         $(pointsId).textContent = String(points);
